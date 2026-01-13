@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>ShopModern - Premium Curated Essentials</title>
+    <link rel="stylesheet" href="styles.css" />
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <div class="app-container">
+      <!-- Sidebar -->
+      <aside class="sidebar">
+        <div class="sidebar-header">
+          <div class="logo-icon">
+            <svg viewBox="0 0 24 24" class="icon-svg">
+              <path
+                d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 14h-2v-4h2v4zm0-6h-2V7h2v3zm4 6h-2v-4h2v4zm0-6h-2V7h2v3z"
+              />
+            </svg>
+          </div>
+          <span class="logo-text">ShopModern</span>
+        </div>
+
+        <div class="sidebar-section">
+          <h3>Categories</h3>
+          <nav id="category-list" class="category-nav">
+            <!-- Categories injected by JS -->
+          </nav>
+        </div>
+
+        <div class="sidebar-section">
+          <h3>Price Range</h3>
+          <div class="price-range-container">
+            <input
+              type="range"
+              min="0"
+              max="1000"
+              step="10"
+              value="750"
+              class="range-slider"
+              id="price-range"
+            />
+            <div class="price-labels">
+              <div class="price-min">
+                <span>Min</span>
+                <span>Fr. 0</span>
+              </div>
+              <div class="price-max">
+                <span>Max</span>
+                <span id="price-value">Fr. 750</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="sidebar-section">
+          <h3>Rating</h3>
+          <label class="rating-filter">
+            <input type="checkbox" class="checkbox" />
+            <div class="stars">
+              <i data-lucide="star" class="star-filled"></i>
+              <i data-lucide="star" class="star-filled"></i>
+              <i data-lucide="star" class="star-filled"></i>
+              <i data-lucide="star" class="star-filled"></i>
+              <i data-lucide="star" class="star-empty"></i>
+            </div>
+            <span>& Up</span>
+          </label>
+        </div>
+        <div class="sidebar-section">
+          <a href="pages/add-product/add-product.html" class="add-product-btn">
+            <i data-lucide="plus-circle"></i>
+            Add Product
+          </a>
+        </div>
+      </aside>
+
+      <!-- Main Content -->
+      <main class="main-wrapper">
+        <!-- Header -->
+        <header class="top-header">
+          <div class="search-container">
+            <div class="search-icon-wrapper">
+              <i data-lucide="search"></i>
+            </div>
+            <input
+              type="text"
+              class="search-input"
+              placeholder="Search for premium products..."
+              id="search-input"
+            />
+          </div>
+
+          <div class="header-actions">
+            <button class="icon-btn cart-btn">
+              <i data-lucide="shopping-cart"></i>
+              <span class="badge"></span>
+            </button>
+            <button class="icon-btn">
+              <i data-lucide="heart"></i>
+            </button>
+
+            <div class="divider"></div>
+            <input type="file" id="avatar-input" accept="image/*" style="display: none;" />
+
+            <div class="auth-buttons" id="auth-buttons">
+              <a href="pages/authentication/login.html" class="btn btn--ghost">Log In</a>
+              <a href="pages/authentication/signin.html" class="btn btn--primary">Sign Up</a>
+            </div>
+
+            <button class="user-profile" id="user-profile-btn" style="display: none;">
+              <div class="user-info">
+                <p class="user-name" id="user-name">Guest</p>
+                <p class="user-role" id="user-email">Sign In</p>
+              </div>
+              <img
+                src="src/images/profile.jpg"
+                alt="User profile"
+                class="avatar"
+                id="user-avatar"
+              />
+            </button>
+          </div>
+        </header>
+
+        <div class="content-area">
+          <!-- Breadcrumbs -->
+          <nav class="breadcrumbs">
+            <span>Home</span>
+            <i data-lucide="chevron-right" class="breadcrumb-icon"></i>
+            <span class="current">Shop All</span>
+          </nav>
+
+          <!-- Page Title Area -->
+          <div class="page-header">
+            <div class="title-section">
+              <h1>Featured Collections</h1>
+              <p>
+                Discover our latest curated essentials for a modern lifestyle.
+              </p>
+            </div>
+
+            <div class="sort-section">
+              <span class="sort-label">Sort by:</span>
+              <div class="select-wrapper">
+                <select id="sort-select">
+                  <option value="Newest Arrivals">Newest Arrivals</option>
+                  <option value="Price: Low to High">Price: Low to High</option>
+                  <option value="Price: High to Low">Price: High to Low</option>
+                  <option value="Popularity">Popularity</option>
+                </select>
+                <div class="select-arrow">
+                  <i data-lucide="chevron-right"></i>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Product Grid -->
+          <div id="product-grid" class="product-grid">
+            <!-- Products injected by JS -->
+          </div>
+
+          <!-- Load More -->
+          <div class="load-more-container">
+            <button class="btn-load-more">Load More Products</button>
+          </div>
+        </div>
+
+        <!-- Footer -->
+        <footer class="main-footer">
+          <div class="footer-content">
+            <div class="footer-brand">
+              <div class="footer-logo">
+                <div class="logo-icon-sm">
+                  <svg viewBox="0 0 24 24" class="icon-svg">
+                    <path
+                      d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 14h-2v-4h2v4zm0-6h-2V7h2v3zm4 6h-2v-4h2v4zm0-6h-2V7h2v3z"
+                    />
+                  </svg>
+                </div>
+                <span>ShopModern</span>
+              </div>
+              <p>© 2026. All rights reserved.</p>
+            </div>
+
+            <div class="footer-links">
+              <a href="#">Privacy Policy</a>
+              <a href="#">Terms of Service</a>
+              <a href="#">Support</a>
+            </div>
+          </div>
+        </footer>
+      </main>
+    </div>
+      <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="backend/auth/supabase-client.js"></script>
+    <script src="script.js"></script>
+    <script>
+      // Initialize icons after DOM load or just call it
+      // The script.js will also handle re-rendering icons if needed
+      lucide.createIcons();
+    </script>
+  </body>
+</html>

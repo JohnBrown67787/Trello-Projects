@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Shop Admin • Add New Product</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+
+    <link rel="stylesheet" href="add-product.css" />
+  </head>
+  <body>
+    <header class="topbar">
+      <div class="topbar__inner">
+        <a class="brand" href="#" aria-label="Shop Admin home">
+          <span class="brand__mark" aria-hidden="true"></span>
+          <span class="brand__text">Shop Admin</span>
+        </a>
+
+        <nav class="nav" aria-label="Primary">
+          <a class="nav__link" href="../../index.html">Dashboard</a>
+          <a class="nav__link is-active" href="add-product.html" aria-current="page"
+            >Products</a
+          >
+          <a class="nav__link" href="/orders.html">Orders</a>
+          <a class="nav__link" href="/settings.html">Settings</a>
+        </nav>
+
+        <button class="avatar" type="button" aria-label="Account">
+          <span class="avatar__dot" aria-hidden="true">⧉</span>
+        </button>
+      </div>
+    </header>
+
+    <main class="content">
+      <section class="page">
+        <header class="page__header">
+          <h1 class="page__title">Add New Product</h1>
+          <p class="page__subtitle">
+            Fill in the details below to list a new item in the shop.
+          </p>
+        </header>
+
+        <section class="card">
+          <form class="form" id="productForm" novalidate>
+            <div class="form__grid">
+              <div class="field">
+                <label class="field__label" for="productName"
+                  >Product Name</label
+                >
+                <input
+                  class="field__control"
+                  id="productName"
+                  name="productName"
+                  type="text"
+                  placeholder="e.g., Wireless Headphones"
+                  autocomplete="off"
+                  required
+                />
+                <p class="field__hint" id="nameHint">
+                  Give your product a clear, searchable name.
+                </p>
+              </div>
+
+              <div class="field">
+                <label class="field__label" for="price">Price (CAF)</label>
+                <div class="money">
+                  <span class="money__prefix" aria-hidden="true"></span>
+                  <input
+                    class="field__control money__input"
+                    id="price"
+                    name="price"
+                    type="text"
+                    inputmode="decimal"
+                    placeholder="0.00"
+                    autocomplete="off"
+                    aria-describedby="priceHint"
+                  />
+                </div>
+                <p class="field__hint" id="priceHint">
+                  Use two decimals (e.g., 5000.00).
+                </p>
+              </div>
+            </div>
+
+            <div class="field field--full">
+              <label class="field__label" for="description">Description</label>
+              <textarea
+                class="field__control field__control--textarea"
+                id="description"
+                name="description"
+                placeholder="Write a detailed description of the product..."
+                rows="7"
+                required
+              ></textarea>
+            </div>
+
+            <div class="field field--full">
+              <div class="field__labelRow">
+                <label class="field__label" for="productImage"
+                  >Product Image</label
+                >
+                <span class="pill" id="uploadStatus" aria-live="polite"
+                  >No file selected</span
+                >
+              </div>
+
+              <input
+                class="sr-only"
+                id="productImage"
+                name="productImage"
+                type="file"
+                accept="image/png,image/jpeg,image/gif,image/svg+xml"
+              />
+
+              <div
+                class="dropzone"
+                id="dropzone"
+                role="button"
+                tabindex="0"
+                aria-describedby="uploadHelp uploadError"
+              >
+                <div class="dropzone__inner" id="dropzoneInner">
+                  <div class="dropzone__icon" aria-hidden="true">
+                    <svg width="28" height="28" viewBox="0 0 24 24" fill="none">
+                      <path
+                        d="M12 16V8"
+                        stroke="currentColor"
+                        stroke-width="2"
+                        stroke-linecap="round"
+                      />
+                      <path
+                        d="M8.5 11.5 12 8l3.5 3.5"
+                        stroke="currentColor"
+                        stroke-width="2"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                      />
+                      <path
+                        d="M7 16.5a4.5 4.5 0 1 1 1.4-8.8A5 5 0 0 1 18.8 10 3.5 3.5 0 1 1 18 16.5H7Z"
+                        stroke="currentColor"
+                        stroke-width="2"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                      />
+                    </svg>
+                  </div>
+                  <div class="dropzone__text">
+                    <p class="dropzone__title">
+                      Click to upload or drag and drop
+                    </p>
+                    <p class="dropzone__meta" id="uploadHelp">
+                      SVG, PNG, JPG or GIF (max. 800×400px)
+                    </p>
+                  </div>
+                </div>
+
+                <div class="dropzone__preview" id="preview" hidden>
+                  <img
+                    class="dropzone__img"
+                    id="previewImg"
+                    alt="Selected product image preview"
+                  />
+                  <div class="dropzone__file">
+                    <div class="dropzone__filename" id="fileName">—</div>
+                    <button class="linkBtn" type="button" id="removeImage">
+                      Remove
+                    </button>
+                  </div>
+                </div>
+              </div>
+
+              <p class="error" id="uploadError" role="alert" hidden></p>
+            </div>
+
+            <div class="actions">
+              <button class="btn btn--ghost" type="button" id="cancelBtn">
+                Cancel
+              </button>
+              <button class="btn btn--primary" type="submit">
+                Save Product
+              </button>
+            </div>
+          </form>
+        </section>
+
+        <footer class="page__footer">
+          <p class="help">
+            <span class="help__dot" aria-hidden="true">i</span>
+            Need help listing your product? Check our
+            <a href="#" class="help__link">merchant guide</a>.
+          </p>
+          <p class="copyright">
+            © 2024 Shop Admin Dashboard. All rights reserved.
+          </p>
+        </footer>
+      </section>
+    </main>
+
+    <script src="add-product.js" defer></script>
+  </body>
+</html>

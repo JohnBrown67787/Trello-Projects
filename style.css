@@ -1,0 +1,290 @@
+/* 
+  General Styles and CSS Variables 
+  We use variables for colors to make it easier to change the theme later.
+*/
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+
+:root {
+    --primary-color: #2563EB;        /* Main blue color for buttons and links */
+    --primary-hover: #1D4ED8;        /* Darker blue for hover states */
+    --text-main: #1F2937;            /* Dark gray for main text */
+    --text-muted: #6B7280;           /* Lighter gray for secondary text */
+    --background-body: #F3F4F6;      /* Light gray background for the page */
+    --background-card: #FFFFFF;      /* White background for the form card */
+    --border-color: #E5E7EB;         /* Light gray border */
+    --font-main: 'Inter', sans-serif;
+}
+
+/* Reset default browser styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box; /* Ensures padding doesn't affect element width */
+}
+
+body {
+    font-family: var(--font-main);
+    background-color: var(--background-body);
+    color: var(--text-main);
+    line-height: 1.5;
+    min-height: 100vh; /* Make sure body takes full viewport height */
+    display: flex;
+    flex-direction: column;
+}
+
+/* 
+  Navigation Bar 
+*/
+.navbar {
+    background-color: var(--background-card);
+    padding: 1rem 2rem;
+    display: flex;
+    justify-content: space-between; /* Space out logo and links */
+    align-items: center;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.brand {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: var(--text-main);
+    text-decoration: none; /* Remove underline from link */
+}
+
+/* Simple circle logo */
+.logo-icon {
+    width: 24px;
+    height: 24px;
+    background-color: var(--primary-color);
+    border-radius: 50%;
+    color: white; /* For the SVG inside */
+}
+
+.nav-links {
+    display: flex;
+    gap: 20px;
+}
+
+.nav-link {
+    text-decoration: none;
+    color: var(--text-main);
+    font-weight: 500;
+}
+
+.nav-link:hover {
+    color: var(--primary-color);
+}
+
+.nav-btn {
+    background-color: var(--primary-color);
+    color: white;
+    padding: 8px 16px;
+    border-radius: 6px;
+    text-decoration: none;
+    font-weight: 500;
+    transition: background-color 0.2s; /* Smooth color change */
+}
+
+.nav-btn:hover {
+    background-color: var(--primary-hover);
+}
+
+/* 
+  Main Layout 
+  Centers the card on the screen
+*/
+.main-container {
+    flex: 1; /* Pushes footer down */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 2rem;
+}
+
+.auth-card {
+    background-color: var(--background-card);
+    width: 100%;
+    max-width: 450px; /* Limit card width */
+    padding: 40px;
+    border-radius: 12px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Soft shadow */
+    text-align: center;
+}
+
+.auth-header {
+    margin-bottom: 30px;
+}
+
+.auth-title {
+    font-size: 1.8rem;
+    font-weight: 700;
+    margin-bottom: 10px;
+}
+
+.auth-subtitle {
+    color: var(--text-muted);
+    font-size: 0.9rem;
+}
+
+/* 
+  Form Styles 
+*/
+.form-group {
+    margin-bottom: 20px;
+    text-align: left;
+}
+
+.form-label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: 600;
+    font-size: 0.9rem;
+    display: flex;
+    justify-content: space-between;
+}
+
+.form-input {
+    width: 100%;
+    padding: 10px 12px;
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    font-size: 1rem;
+    font-family: inherit;
+}
+
+.form-input:focus {
+    outline: none;
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1); /* Blue glow */
+}
+
+.password-wrapper {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.toggle-password {
+    background: none;
+    border: none;
+    position: absolute;
+    right: 10px;
+    cursor: pointer;
+    color: var(--text-muted);
+}
+
+.forgot-password {
+    color: var(--primary-color);
+    text-decoration: none;
+    font-size: 0.8rem;
+}
+
+.forgot-password:hover {
+    text-decoration: underline;
+}
+
+.btn-submit {
+    width: 100%;
+    padding: 12px;
+    background-color: var(--primary-color);
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
+}
+
+.btn-submit:hover {
+    background-color: var(--primary-hover);
+}
+
+/* 
+  Social Login Styles 
+*/
+.divider {
+    display: flex;
+    align-items: center;
+    margin: 24px 0;
+    color: var(--text-muted);
+    font-size: 0.9rem;
+}
+
+.divider::before, 
+.divider::after {
+    content: "";
+    flex: 1;
+    height: 1px;
+    background-color: var(--border-color);
+}
+
+.divider::before { margin-right: 10px; }
+.divider::after { margin-left: 10px; }
+
+.social-buttons {
+    display: grid;
+    grid-template-columns: 1fr 1fr; /* Two equal columns */
+    gap: 15px;
+    margin-bottom: 24px;
+}
+
+.btn-social {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
+    padding: 10px;
+    background-color: white;
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    font-size: 0.9rem;
+    font-weight: 500;
+    cursor: pointer;
+}
+
+.btn-social:hover {
+    background-color: #F9FAFB;
+}
+
+.social-icon {
+    width: 20px;
+    height: 20px;
+}
+
+/* 
+  Footer 
+*/
+.auth-footer-text {
+    font-size: 0.9rem;
+    color: var(--text-muted);
+    border-top: 1px solid #eee;
+    padding-top: 20px;
+}
+
+.text-link {
+    color: var(--primary-color);
+    font-weight: 600;
+    text-decoration: none;
+}
+
+.text-link:hover {
+    text-decoration: underline;
+}
+
+.footer-global {
+    text-align: center;
+    padding: 20px;
+    font-size: 0.8rem;
+    color: var(--text-muted);
+}
+
+/* Validation Styles */
+.input-error { border-color: #EF4444 !important; }
+.error-message { color: #EF4444; font-size: 0.8rem; margin-top: 4px; text-align: left; }
