@@ -1,0 +1,160 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>ShopModern — Checkout</title>
+  <link rel="stylesheet" href="checkout.css" />
+</head>
+
+<body>
+  <div class="topbar">
+    <div class="brand">
+      <div class="brand-badge">🛍</div>
+      ShopModern
+    </div>
+
+    <div class="steps" aria-label="Checkout steps">
+      <div class="step done"><span class="dot">1</span> Cart</div>
+      <div class="sep">›</div>
+      <div class="step active"><span class="dot">2</span> Checkout</div>
+      <div class="sep">›</div>
+      <div class="step"><span class="dot">3</span> Confirmation</div>
+    </div>
+
+    <button class="helpbtn" aria-label="Help">?</button>
+  </div>
+
+  <div class="container">
+    <a class="back" href="cart.html">Back to Cart</a>
+    <h1>Checkout</h1>
+
+    <div class="page">
+      <!-- LEFT -->
+      <div class="left">
+        <div class="card section">
+          <div class="section-head">
+            <span class="icon">🚚</span>
+            <div>
+              <div class="section-title">Shipping Information</div>
+            </div>
+          </div>
+
+          <div class="form">
+            <div class="field">
+              <label>Full Name</label>
+              <input id="fullName" placeholder="Alex Rivera" value="Alex Rivera" />
+            </div>
+
+            <div class="field">
+              <label>Street Address</label>
+              <input id="street" placeholder="123 Modern Ave" value="123 Modern Ave" />
+            </div>
+
+            <div class="grid2">
+              <div class="field">
+                <label>City</label>
+                <input id="city" placeholder="Douala" value="Douala" />
+              </div>
+              <div class="field">
+                <label>Zip Code</label>
+                <input id="zip" placeholder="BP 1234" value="BP 1234" />
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="card section">
+          <div class="section-head">
+            <span class="icon">💳</span>
+            <div>
+              <div class="section-title">Payment Method</div>
+            </div>
+          </div>
+
+          <div class="pay-grid">
+            <button class="pay-option selected" data-method="mtn" type="button">
+              <div class="pill mtn">MTN</div>
+              <div class="pay-name">MTN Mobile Money</div>
+            </button>
+
+            <button class="pay-option" data-method="orange" type="button">
+              <div class="pill om">OM</div>
+              <div class="pay-name">Orange Money</div>
+            </button>
+          </div>
+
+          <div class="or">
+            <span>OR PAY WITH CARD</span>
+          </div>
+
+          <div class="form">
+            <div class="field">
+              <label>Card Number</label>
+              <input id="cardNumber" placeholder="0000 0000 0000 0000" />
+            </div>
+
+            <div class="grid2">
+              <div class="field">
+                <label>Expiry Date</label>
+                <input id="expiry" placeholder="MM/YY" />
+              </div>
+              <div class="field">
+                <label>CVV</label>
+                <input id="cvv" placeholder="123" />
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- RIGHT -->
+      <div class="right">
+        <div class="card summary">
+          <div class="summary-title">Order Summary</div>
+
+          <div id="summaryItems" class="summary-items"></div>
+
+          <div class="summary-lines">
+            <div class="line"><span>Subtotal</span><span id="sumSubtotal">0 CFA</span></div>
+            <div class="line" id="sumDiscountLine" style="display:none;">
+              <span id="sumDiscountLabel">Discount</span>
+              <span id="sumDiscount">-0 CFA</span>
+            </div>
+            <div class="line"><span>Shipping</span><span id="sumShipping" class="free">Free</span></div>
+            <div class="line"><span>Taxes (Estimated)</span><span id="sumTax">0 CFA</span></div>
+          </div>
+
+          <div class="summary-total">
+            <div class="total-label">Total</div>
+            <div class="total-value" id="sumTotal">0 CFA</div>
+          </div>
+
+          <button class="purchase" id="completePurchaseBtn" type="button">
+            🔒 Complete Purchase
+          </button>
+
+          <div class="secure">🛡 Secure SSL Encrypted Checkout</div>
+          <div class="error" id="checkoutError" style="display:none;"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <footer>
+    <div class="footer-left">
+      <span class="foot-badge">🛍</span>
+      <span>ShopModern</span>
+      <span class="muted">© 2024. All rights reserved.</span>
+    </div>
+    <div class="footer-links">
+      <a href="#">Privacy Policy</a>
+      <a href="#">Terms of Service</a>
+      <a href="#">Support</a>
+    </div>
+  </footer>
+
+  <script src="shopmodern-cart.js"></script>
+  <script src="checkout.js"></script>
+</body>
+</html>
