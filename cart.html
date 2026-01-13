@@ -1,0 +1,122 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>ShopModern — Cart</title>
+  <link rel="stylesheet" href="cart.css" />
+</head>
+
+<body>
+  <div class="topbar">
+    <div class="brand">
+      <div class="brand-badge">🛍</div>
+      ShopModern
+    </div>
+
+    <div class="search" aria-label="Search">
+      <span class="search-icon">⌕</span>
+      <input type="text" placeholder="Search for items..." />
+    </div>
+
+    <div class="actions">
+      <button class="iconbtn" aria-label="Cart">
+        🛒
+        <span class="badge" id="cartCount">0</span>
+      </button>
+      <button class="iconbtn" aria-label="Favorites">♥</button>
+
+      <div class="user">
+        <div>
+          <div class="name">Alex Rivera</div>
+          <div class="tier">Pro Member</div>
+        </div>
+        <div class="avatar" aria-hidden="true"></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="container">
+    <div class="crumbs">Home &nbsp;›&nbsp; Shopping Cart</div>
+
+    <div class="page">
+      <!-- LEFT -->
+      <div>
+        <h1 id="cartTitle">Shopping Cart (0 items)</h1>
+
+        <div class="card items-card" id="itemsCard"></div>
+
+        <button class="continue">← Continue Shopping</button>
+
+        <div class="demo">
+          <h3>Quick demo (to reproduce and verify fix)</h3>
+          <div class="btns">
+            <button id="demoAdd3">Add 3 items (185 000 + 115 000 + 20 000 CFA)</button>
+            <button id="demoClear">Clear cart</button>
+            <button id="demoApplySave10">Apply code SAVE10</button>
+          </div>
+          <div class="hint">
+  Codes: <b>SAVE10</b> (10% off), <b>TAKE5000</b> (5 000 CFA off).<br/>
+  Tax is calculated on discounted subtotal. Shipping is flat 10 000 CFA.
+</div>
+        </div>
+      </div>
+
+      <!-- RIGHT -->
+      <div>
+        <div class="card summary-card">
+          <h2>Order Summary</h2>
+
+          <div class="row"><span>Subtotal</span><span id="subtotal">$0.00</span></div>
+
+          <div class="row" id="discountRow" style="display:none;">
+            <span id="discountLabel">Discount</span>
+            <span id="discountAmount">-$0.00</span>
+          </div>
+
+          <div class="row"><span>Shipping Estimate</span><span id="shipping">$0.00</span></div>
+          <div class="row"><span>Tax Estimate</span><span id="tax">$0.00</span></div>
+
+          <div class="divider"></div>
+
+          <div class="row total"><span>Total</span><span id="total">$0.00</span></div>
+
+          <div class="discount">
+            <label for="discountInput">DISCOUNT CODE</label>
+
+            <div class="discount-row">
+              <input id="discountInput" placeholder="Enter code" />
+              <button id="applyBtn">Apply</button>
+            </div>
+
+            <div class="error" id="discountError" style="display:none;"></div>
+
+            <div class="applied" id="discountApplied" style="display:none;">
+              <span id="discountAppliedText">Applied</span>
+              <button class="link" id="removeDiscountBtn">Remove</button>
+            </div>
+          </div>
+
+          <button class="checkout" id="checkoutBtn" disabled>Proceed to Checkout →</button>
+        </div>
+
+        <div class="card help-card">
+          <div class="t">Need Help?</div>
+          <div class="s">Our support team is available 24/7 to assist with your order.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <footer>
+    <div>© 2024. All rights reserved.</div>
+    <div class="footer-links">
+      <a href="#">Privacy Policy</a>
+      <a href="#">Terms of Service</a>
+      <a href="#">Support</a>
+    </div>
+  </footer>
+
+  <script src="cart.js"></script>
+</body>
+</html>
