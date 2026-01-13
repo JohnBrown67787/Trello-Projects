@@ -185,12 +185,15 @@ function renderProducts() {
             <div class="card-content">
                 <div class="card-header">
                     <h3 class="card-title">${product.title}</h3>
-                    <span class="card-price">Fr. ${product.price.toFixed(
-                      2
-                    )}</span>
+                </div>
+                <div class="card-price-row">
+                    <span class="card-price">Fr. ${product.price.toFixed(2)}</span>
+                    <button class="card-cart-btn" onclick="const e=event; e.stopPropagation(); alert('Added to cart!');">
+                        <i data-lucide="shopping-cart"></i>
+                    </button>
                 </div>
                 <p class="card-desc">${product.description}</p>
-                <button class="view-btn">
+                <button class="view-btn" onclick="alert('Product details coming soon!')">
                     <i data-lucide="eye"></i>
                     View Details
                 </button>

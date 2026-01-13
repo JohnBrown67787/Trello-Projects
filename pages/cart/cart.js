@@ -265,6 +265,7 @@ function render(){
       "Checkout payload (store these totals for order + email):\n\n" +
       JSON.stringify(payload, null, 2)
     );
+    window.location.href = '../checkout/checkout.html';
   };
 }
 

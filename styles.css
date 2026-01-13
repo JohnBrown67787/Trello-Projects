@@ -507,6 +507,11 @@ body {
   margin-bottom: 0.5rem;
 }
 
+.italic-highlight {
+  font-style: italic;
+  color: var(--blue-600);
+}
+
 @media (min-width: 1024px) {
   .title-section h1 {
     font-size: 2.25rem; /* text-4xl */
@@ -586,24 +591,17 @@ body {
 .product-grid {
   display: grid;
   grid-template-columns: 1fr;
-  gap: 1.5rem;
+  gap: 1rem; /* 16px */
   margin-bottom: 4rem;
 }
 
-@media (min-width: 640px) {
+@media (min-width: 768px) {
   .product-grid {
     grid-template-columns: repeat(2, 1fr);
   }
 }
 
 @media (min-width: 1024px) {
-  .product-grid {
-    grid-template-columns: repeat(3, 1fr);
-    gap: 2rem;
-  }
-}
-
-@media (min-width: 1280px) {
   .product-grid {
     grid-template-columns: repeat(4, 1fr);
   }
@@ -630,7 +628,7 @@ body {
 
 .card-image-wrapper {
   position: relative;
-  aspect-ratio: 4/3;
+  aspect-ratio: 1 / 1;
   overflow: hidden;
   background-color: var(--bg-gray-50);
 }
@@ -703,8 +701,8 @@ body {
 
 .card-header {
   display: flex;
-  justify-content: space-between;
-  align-items: flex-start;
+  flex-direction: column;
+  gap: 0.25rem;
   margin-bottom: 0.5rem;
 }
 
@@ -714,7 +712,7 @@ body {
   transition: color 0.2s;
   overflow: hidden;
   display: -webkit-box;
-  -webkit-line-clamp: 1;
+  -webkit-line-clamp: 2; /* 2 lines max */
   -webkit-box-orient: vertical;
 }
 
@@ -722,9 +720,42 @@ body {
   color: var(--blue-600);
 }
 
+.card-price-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 0.25rem;
+}
+
 .card-price {
   font-weight: 700;
   color: var(--blue-600);
+  font-size: 1rem;
+}
+
+.card-cart-btn {
+  width: 2rem;
+  height: 2rem;
+  border-radius: 50%;
+  background-color: var(--text-gray-900);
+  color: white;
+  border: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.2s;
+  box-shadow: var(--shadow-sm);
+}
+
+.card-cart-btn:hover {
+  background-color: var(--blue-600);
+  transform: scale(1.05);
+}
+
+.card-cart-btn i {
+  width: 1rem;
+  height: 1rem;
 }
 
 .card-desc {

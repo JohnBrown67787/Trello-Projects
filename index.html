@@ -16,7 +16,7 @@
     <div class="app-container">
       <!-- Sidebar -->
       <aside class="sidebar">
-        <div class="sidebar-header">
+        <a href="index.html" class="sidebar-header" style="text-decoration: none;">
           <div class="logo-icon">
             <svg viewBox="0 0 24 24" class="icon-svg">
               <path
@@ -24,8 +24,8 @@
               />
             </svg>
           </div>
-          <span class="logo-text">ShopModern</span>
-        </div>
+          <span class="logo-text">LuxeGrid</span>
+        </a>
 
         <div class="sidebar-section">
           <h3>Categories</h3>
@@ -98,7 +98,7 @@
           </div>
 
           <div class="header-actions">
-            <button class="icon-btn cart-btn">
+            <button class="icon-btn cart-btn" onclick="window.location.href='pages/cart/cart.html'">
               <i data-lucide="shopping-cart"></i>
               <span class="badge"></span>
             </button>
@@ -132,17 +132,17 @@
         <div class="content-area">
           <!-- Breadcrumbs -->
           <nav class="breadcrumbs">
-            <span>Home</span>
-            <i data-lucide="chevron-right" class="breadcrumb-icon"></i>
-            <span class="current">Shop All</span>
+            <span style="color: #9ca3af; font-size: 0.75rem; letter-spacing: 0.05em; text-transform: uppercase; font-weight: 600;">Collection</span>
+            <i data-lucide="chevron-right" class="breadcrumb-icon" style="width: 1rem; height: 1rem; color: #d1d5db;"></i>
+            <span class="current" style="color: #111827; font-size: 0.75rem; letter-spacing: 0.05em; text-transform: uppercase; font-weight: 700;">Summer 2024</span>
           </nav>
 
           <!-- Page Title Area -->
           <div class="page-header">
             <div class="title-section">
-              <h1>Featured Collections</h1>
+              <h1>Discovery <span class="italic-highlight">Hub</span></h1>
               <p>
-                Discover our latest curated essentials for a modern lifestyle.
+                Explore our latest curated essentials designed for the modern lifestyle, balancing minimalist aesthetics with peak performance in West African markets.
               </p>
             </div>
 
@@ -185,7 +185,7 @@
                     />
                   </svg>
                 </div>
-                <span>ShopModern</span>
+                <span>LuxeGrid</span>
               </div>
               <p>© 2026. All rights reserved.</p>
             </div>
@@ -201,6 +201,7 @@
     </div>
       <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
     <script src="backend/auth/supabase-client.js"></script>
+    <script src="src/data.js"></script>
     <script src="script.js"></script>
     <script>
       // Initialize icons after DOM load or just call it
