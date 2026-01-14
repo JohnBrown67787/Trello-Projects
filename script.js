@@ -1,81 +1,8 @@
 /**
  * Constants & Data
  */
-const CATEGORIES = [
-  { name: "All Products", icon: "layout-grid" },
-  { name: "Electronics", icon: "smartphone" },
-  { name: "Fashion", icon: "shirt" },
-  { name: "Home & Living", icon: "home" },
-  { name: "Accessories", icon: "package" },
-];
-
-const MOCK_PRODUCTS = [
-  {
-    id: "1",
-    title: "Studio Wireless Headphones",
-    price: 299.0,
-    description: "Noise cancelling premium audio experience with 40h battery.",
-    image: "src/images/headphones.jpg",
-    isNew: true,
-    category: "Electronics",
-  },
-  {
-    id: "2",
-    title: "Chronos Minimalist Watch",
-    price: 185.0,
-    description: "Precision engineered silver watch with leather strap.",
-    image: "src/images/watch.jpg",
-    category: "Accessories",
-  },
-  {
-    id: "3",
-    title: "Nomad Leather Backpack",
-    price: 145.0,
-    description: "Genuine full-grain leather for the modern traveler.",
-    image: "src/images/backpack.jpg",
-    category: "Fashion",
-  },
-  {
-    id: "4",
-    title: "Smart Hub Controller",
-    price: 120.0,
-    description: "Universal automation for your smart home devices.",
-    image: "src/images/shub.jpg",
-    category: "Electronics",
-  },
-  {
-    id: "5",
-    title: "Mechanical Tactile Keyboard",
-    price: 155.0,
-    description: "Hot-swappable tactile switches with RGB lighting.",
-    image: "src/images/keyboard.jpg",
-    category: "Electronics",
-  },
-  {
-    id: "6",
-    title: "Oak Aura Desk Lamp",
-    price: 89.0,
-    description: "Natural wood finish with adjustable warm light.",
-    image: "src/images/lamp.jpg",
-    category: "Home & Living",
-  },
-  {
-    id: "7",
-    title: "Sonic Buds Gen 2",
-    price: 129.0,
-    description: "Active noise cancellation with crystal clear voice calls.",
-    image: "src/images/buds.jpg",
-    category: "Electronics",
-  },
-  {
-    id: "8",
-    title: "Organic Cotton Tee",
-    price: 35.0,
-    description: "Sustainable fabric with relaxed, breathable fit.",
-    image: "src/images/tee.jpg",
-    category: "Fashion",
-  },
-];
+// Data is now loaded from src/data.js
+// Access CATEGORIES and MOCK_PRODUCTS directly
 
 /**
  * State
@@ -187,13 +114,13 @@ function renderProducts() {
                     <h3 class="card-title">${product.title}</h3>
                 </div>
                 <div class="card-price-row">
-                    <span class="card-price">Fr. ${product.price.toFixed(2)}</span>
-                    <button class="card-cart-btn" onclick="const e=event; e.stopPropagation(); alert('Added to cart!');">
+                    <span class="card-price">${CartUtils.formatCurrency(product.price)}</span>
+                    <button class="card-cart-btn" onclick="addToCartHandler('${product.id}')">
                         <i data-lucide="shopping-cart"></i>
                     </button>
                 </div>
-                <p class="card-desc">${product.description}</p>
-                <button class="view-btn" onclick="alert('Product details coming soon!')">
+                <p class="card-desc">${product.shortDescription || product.description}</p>
+                 <button class="view-btn" onclick="window.location.href='pages/product-details/product-details.html?id=${product.id}'">
                     <i data-lucide="eye"></i>
                     View Details
                 </button>
@@ -206,6 +133,18 @@ function renderProducts() {
   if (window.lucide) {
     window.lucide.createIcons();
   }
+}
+
+// Handler helper to avoid inline object passing issues
+function addToCartHandler(productId) {
+    const event = window.event;
+    if(event) event.stopPropagation();
+    
+    const product = MOCK_PRODUCTS.find(p => p.id === productId);
+    if (product) {
+        CartUtils.addToCart(product);
+        alert('Added to cart!'); // Temporary feedback
+    }
 }
 
 /**
@@ -228,111 +167,9 @@ priceRangeInput.addEventListener("input", (e) => {
 function init() {
   renderCategories();
   renderProducts();
-  checkUserSession();
+  // checkUserSession(); // Removed: Handled by src/auth-utils.js
 }
 
-async function checkUserSession() {
-  const userNameEl = document.getElementById("user-name");
-  const userEmailEl = document.getElementById("user-email");
-  const userAvatarEl = document.getElementById("user-avatar");
-  const profileBtn = document.getElementById("user-profile-btn");
-
-  const authButtons = document.getElementById("auth-buttons");
-
-  if (!window.supabaseClient) {
-    console.error("Supabase client not initialized");
-    return;
-  }
-
-  try {
-    const {
-      data: { session },
-    } = await window.supabaseClient.auth.getSession();
-
-    if (session) {
-      if (authButtons) authButtons.style.display = "none";
-      if (profileBtn) profileBtn.style.display = "flex";
-
-      const { user } = session;
-      const fullName = user.user_metadata.full_name || "User";
-      const email = user.email;
-
-      if (userNameEl) userNameEl.textContent = fullName;
-      if (userEmailEl) userEmailEl.textContent = email;
-      
-      // Update avatar if available in metadata, otherwise keep default
-      if (user.user_metadata.avatar_url && userAvatarEl) {
-        userAvatarEl.src = user.user_metadata.avatar_url;
-      }
-
-      const avatarInput = document.getElementById("avatar-input");
-      if (avatarInput && userAvatarEl) {
-        // Handle avatar click
-        userAvatarEl.style.cursor = "pointer";
-        userAvatarEl.onclick = (e) => {
-          e.stopPropagation(); // Prevent button click
-          avatarInput.click();
-        };
-
-        // Handle file selection
-        avatarInput.onchange = async (e) => {
-          const file = e.target.files[0];
-          if (!file) return;
-
-          try {
-            const fileExt = file.name.split(".").pop();
-            const fileName = `${user.id}/${Date.now()}.${fileExt}`;
-            const filePath = `${fileName}`;
-
-            // Upload to Supabase Storage
-            const { error: uploadError } =
-              await window.supabaseClient.storage
-                .from("avatars")
-                .upload(filePath, file);
-
-            if (uploadError) throw uploadError;
-
-            // Get Public URL
-            const { data } = window.supabaseClient.storage
-              .from("avatars")
-              .getPublicUrl(filePath);
-
-            const publicUrl = data.publicUrl;
-
-            // Update User Metadata
-            const { error: updateUserError } =
-              await window.supabaseClient.auth.updateUser({
-                data: { avatar_url: publicUrl },
-              });
-
-            if (updateUserError) throw updateUserError;
-
-            // Update UI
-            userAvatarEl.src = publicUrl;
-            alert("Avatar updated successfully!");
-          } catch (error) {
-            console.error("Avatar upload error:", error);
-            alert("Failed to upload avatar: " + error.message);
-          }
-        };
-      }
-
-      // Optional: Add click handler to log out or go to profile
-      if (profileBtn) {
-        profileBtn.onclick = () => {
-          // Future: Go to profile or logout
-          console.log("Profile clicked");
-        };
-      }
-    } else {
-      // No session
-      if (authButtons) authButtons.style.display = "flex";
-      if (profileBtn) profileBtn.style.display = "none";
-    }
-  } catch (err) {
-    console.error("Error checking session:", err);
-  }
-}
 
 // Start
 init();

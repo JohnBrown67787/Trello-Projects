@@ -14,7 +14,7 @@ const MOCK_PRODUCTS = [
   {
     id: "1",
     title: "Studio Wireless Pro",
-    price: 299.0,
+    price: 180000,
     shortDescription: "Noise cancelling premium audio experience with 40h battery.",
     description: `Experience listening like never before with the Studio Wireless Pro headphones. Engineered for the true audiophile, these headphones feature industry-leading Active Noise Cancellation (ANC) that blocks out external distractions, allowing you to immerse yourself fully in your music. Whether you're commuting in a busy city or working in a bustling office, the Studio Wireless Pro ensures that only the sounds you want to hear get through. The custom-tuned 40mm drivers deliver a rich, balanced soundstage with deep, punchy bass and crystal-clear highs, bringing every detail of your favorite tracks to life.
 
@@ -36,7 +36,7 @@ Connectivity is seamless with the latest Bluetooth 5.3 technology, providing a s
   {
     id: "2",
     title: "Chronos Minimalist Watch",
-    price: 185.0,
+    price: 115000,
     shortDescription: "Precision engineered silver watch with leather strap.",
     description: `The Chronos Minimalist Watch is a testament to the beauty of simplicity. Stripping away the unnecessary, this timepiece focuses on what truly matters: elegance and precision. The ultra-slim stainless steel case features a brushed silver finish that catches the light just right, offering a sophisticated look that pairs perfectly with both casual and formal attire. The clean, uncluttered dial is protected by scratch-resistant sapphire crystal, ensuring that your watch remains as pristine as the day you bought it.
 
@@ -58,7 +58,7 @@ Water-resistant up to 50 meters, the Chronos Minimalist Watch is built to withst
   {
     id: "3",
     title: "Nomad Leather Backpack",
-    price: 145.0,
+    price: 90000,
     shortDescription: "Genuine full-grain leather for the modern traveler.",
     description: `Embark on your next adventure with the Nomad Leather Backpack, the ultimate companion for the computer-toting traveler. Handcrafted from premium full-grain leather, this backpack is designed to age gracefully, developing a rich, rugged character that is uniquely yours. The durable construction is complemented by heavy-duty brass hardware and reinforced stitching, ensuring that it can handle whatever your journey throws at it.
 
@@ -80,7 +80,7 @@ Comfort hasn't been overlooked. The adjustable shoulder straps are padded and co
   {
     id: "4",
     title: "Smart Hub Controller",
-    price: 120.0,
+    price: 72000,
     shortDescription: "Universal automation for your smart home devices.",
     description: `Transform your living space into a truly intelligent home with the Smart Hub Controller. This sleek, compact device acts as the central brain of your smart ecosystem, unifying all your connected devices into one seamless interface. Compatible with over 50,000 devices from thousands of brands, including lights, locks, thermostats, and sensors, the Smart Hub allows you to control everything from a single app or via voice commands with Alexa, Google Assistant, or Siri.
 
@@ -102,7 +102,7 @@ The Smart Hub Controller isn't just about convenience; it's about efficiency. By
   {
     id: "5",
     title: "Mechanical Tactile Keyboard",
-    price: 155.0,
+    price: 95000,
     shortDescription: "Hot-swappable tactile switches with RGB lighting.",
     description: `Elevate your typing and gaming experience with our Mechanical Tactile Keyboard. Built for enthusiasts and professionals alike, this keyboard features high-performance tactile mechanical switches that provide a satisfying bump and audible click with every keystroke, ensuring precision and feedback that membrane keyboards simply can't match. The hot-swappable PCB allows you to easily change out switches without soldering, giving you the freedom to customize the feel and sound of your board to your exact preference.
 
@@ -124,7 +124,7 @@ Durability is key. The keyboard boasts a solid aluminum top plate that provides 
   {
     id: "6",
     title: "Oak Aura Desk Lamp",
-    price: 89.0,
+    price: 55000,
     shortDescription: "Natural wood finish with adjustable warm light.",
     description: `Bring a touch of nature and warmth to your workspace with the Oak Aura Desk Lamp. Handcrafted from sustainably sourced solid oak, this lamp features a stunning wood grain finish that adds organic beauty to any modern or traditional desk setup. The design is both minimalist and functional, with a flexible arm that allows you to direct light exactly where you need it, perfect for late-night reading, detailed work, or creating a cozy ambient atmosphere.
 
@@ -146,7 +146,7 @@ Safety and stability are built-in. The weighted base ensures the lamp stays firm
   {
     id: "7",
     title: "Sonic Buds Gen 2",
-    price: 129.0,
+    price: 80000,
     shortDescription: "Active noise cancellation with crystal clear voice calls.",
     description: `Immerse yourself in pure sound with the Sonic Buds Gen 2. These next-generation wireless earbuds have been re-engineered from the ground up to deliver a premium audio experience that rivals bulky over-ear headphones. At the core is our advanced Active Noise Cancellation (ANC) technology, which intelligently adapts to your environment to silence unwanted background noise, whether you're on a plane or in a café. Transparency mode lets you hear the world around you with a tap, perfect for quick conversations.
 
@@ -168,7 +168,7 @@ Battery life is impressive, offering up to 8 hours of listening time on a single
   {
     id: "8",
     title: "Organic Cotton Tee",
-    price: 35.0,
+    price: 21000,
     shortDescription: "Sustainable fabric with relaxed, breathable fit.",
     description: `Discover the perfect essential with our Organic Cotton Tee. We believe that a t-shirt should be more than just a basic layer; it should be a commitment to quality and the planet. Made from 100% GOTS-certified organic cotton, this tee is grown without harmful chemicals or pesticides, resulting in a fabric that is incredibly soft, breathable, and kind to sensitive skin. The medium-weight jersey fabric drapes beautifully, offering a fit that is relaxed yet tailored.
 
@@ -186,6 +186,94 @@ Available in a range of earth-inspired colors, our Organic Cotton Tee is dyed us
     ],
     reviews: 45,
     rating: 4.4
+  },
+  {
+    id: "9",
+    title: "Laptop Pro 15\"",
+    price: 780000,
+    shortDescription: "High-performance workstation with 4K display and all-day battery life.",
+    description: `Unleash your creative potential with the Laptop Pro 15". Designed for professionals who demand power and portability, this machine features a stunning 15.6-inch 4K Retina-class display that delivers true-to-life colors and razor-sharp detail. Whether you're editing 8K video, designing complex 3D models, or simply enjoying your favorite movies, the visual experience is nothing short of breathtaking. Powered by the latest 12-core processor and dedicated graphics, it handles intensive tasks with ease, ensuring a smooth and responsive workflow.
+
+The Laptop Pro 15" isn't just about raw performance; it's built for the long haul. The high-capacity battery provides up to 12 hours of usage on a single charge, keeping you productive from your morning commute to your late-night brainstorming sessions. The sleek, aerospace-grade aluminum chassis is both durable and lightweight, making it the perfect travel companion. With a comprehensive suite of ports including Thunderbolt 4, HDMI, and an SD card slot, connectivity is never an issue.
+
+Typing is a joy on the backlit precision keyboard, which offers optimal key travel and tactile feedback. The expansive glass trackpad supports multi-touch gestures for intuitive navigation. Security is integrated seamlessly with a fingerprint sensor for instant login. Experience the perfect harmony of power, design, and efficiency with the Laptop Pro 15"—your ultimate tool for turning ideas into reality.`,
+    image: "src/images/laptop.jpg",
+    isNew: true,
+    category: "Electronics",
+    features: [
+        "15.6\" 4K Display",
+        "12-Core Processor",
+        "12-Hour Battery Life",
+        "Thunderbolt 4 Support"
+    ],
+    reviews: 89,
+    rating: 4.8
+  },
+  {
+    id: "10",
+    title: "Wireless Mouse X500",
+    price: 30000,
+    shortDescription: "Ergonomic precision mouse with multi-device connectivity.",
+    description: `Take control of your digital world with the Wireless Mouse X500. Engineered for comfort and precision, this mouse features an ergonomic sculpted design that fits perfectly in the palm of your hand, reducing strain during extended use. The soft-touch rubber grip ensures a secure hold, while the high-precision optical sensor delivers accurate tracking on virtually any surface, from glass tables to rough denim.
+
+Productivity is at your fingertips with the X500's programmable buttons. Customize commands for your favorite apps to speed up your workflow. The hyper-fast scroll wheel lets you fly through long documents and web pages with a single spin. Connectivity is versatile, offering both Bluetooth and a 2.4GHz USB receiver, allowing you to pair with up to three devices and switch between them seamlessly with the touch of a button.
+
+Say goodbye to frequent battery changes. The Wireless Mouse X500 boasts an impressive battery life of up to 70 days on a full charge via the included USB-C cable. A quick one-minute charge gives you three hours of use, ensuring you're never left powerless in a critical moment. Available in a range of modern colors, the X500 is the perfect blend of style, comfort, and functionality.`,
+    image: "src/images/mouse.jpg",
+    isNew: false,
+    category: "Accessories",
+    features: [
+        "Ergonomic Sculpted Design",
+        "Multi-Device Pairing",
+        "Hyper-Fast Scrolling",
+        "70-Day Battery Life"
+    ],
+    reviews: 215,
+    rating: 4.5
+  },
+  {
+    id: "11",
+    title: "USB-C Hub 7-in-1",
+    price: 36000,
+    shortDescription: "Expand your connectivity with 7 essential ports in one sleek device.",
+    description: `Unlock the full potential of your laptop with the USB-C Hub 7-in-1. in a world where ports are becoming scarce, this compact powerhouse brings back the connectivity you need. It features a 4K HDMI port for crystal-clear external display output, three high-speed USB 3.0 ports for your peripherals, SD and microSD card readers for easy photo transfers, and a USB-C Power Delivery port to keep your laptop charged while you work.
+
+Designed for portability and durability, the hub is encased in a premium aluminum alloy shell that dissipates heat effectively and matches the aesthetic of modern MacBooks and ultrabooks. Its slim profile slips easily into your pocket or laptop bag, making it an essential accessory for digital nomads, photographers, and students. No drivers are required—simply plug and play to instantly expand your workspace.
+
+The USB-C Hub 7-in-1 supports pass-through charging up to 100W, so you never have to sacrifice a charging port for data transfer. The high-speed data transfer rates of up to 5Gbps mean you can transfer a customized HD movie in seconds. reliable, versatile, and stylish, this hub serves as the bridge between your cutting-edge laptop and your essential devices.`,
+    image: "src/images/hub.jpg",
+    isNew: false,
+    category: "Electronics",
+    features: [
+        "4K HDMI Output",
+        "100W Power Delivery",
+        "3x USB 3.0 Ports",
+        "SD/MicroSD Readers"
+    ],
+    reviews: 340,
+    rating: 4.6
+  },
+  {
+    id: "12",
+    title: "Monitor Stand Adjustable",
+    price: 45000,
+    shortDescription: "Ergonomic aluminum stand to elevate your display and organize your desk.",
+    description: `Elevate your workspace—literally and figuratively—with the Monitor Stand Adjustable. Designed to improve your posture and reduce neck strain, this stand raises your monitor to an optimal eye level, promoting a healthier and more comfortable working position. Constructed from high-grade aluminum, it supports monitors up to 32 inches and 20kg with rock-solid stability, ensuring your expensive display is always safe.
+
+The stand's sleek, minimalist design not only looks great but also helps you declutter your desk. The space underneath is perfect for stowing your keyboard and mouse when not in use, creating a clean and organized surface for writing or sketching. The surface is treated with a sandblasted anodized finish that is resistant to scratches and fingerprints, maintaining its premium look over time.
+
+Functionality is enhanced with built-in cable management channels, keeping unsightly wires neatly tucked away. Non-slip silicone pads on the base protect your desk surface and prevent the stand from shifting. organizing your workspace has never been this stylish or effective. Invest in your health and productivity with the Monitor Stand Adjustable.`,
+    image: "src/images/stand.jpg",
+    isNew: false,
+    category: "Home & Living",
+    features: [
+        "Ergonomic Height",
+        "Premium Aluminum Body",
+        "Desk Organizer Space",
+        "Supports up to 20kg"
+    ],
+    reviews: 112,
+    rating: 4.7
   },
 ];
 

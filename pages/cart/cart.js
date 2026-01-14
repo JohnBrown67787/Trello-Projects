@@ -1,14 +1,13 @@
 // -------------------------
-// Config (CFA)
+// Config
 // -------------------------
 const CONFIG = {
-  currencySuffix: "CFA",
-  taxRate: 0.18,        // 18% (example in your UI: 300,000 * 18% = 54,000)
+  taxRate: 0.18,        // 18%
   shippingFlat: 10000   // 10,000 CFA
 };
 
 // -------------------------
-// Utilities (safe rounding)
+// Utilities
 // -------------------------
 function round2(n){
   return Math.round((n + Number.EPSILON) * 100) / 100;
@@ -28,21 +27,8 @@ function escapeHtml(str){
     .replaceAll("'","&#039;");
 }
 
-// Format: 185 000 CFA (no decimals for CFA amounts in your UI)
-function formatCFA(amount){
-  const n = Math.round(amount); // CFA shown as whole numbers in your screenshot
-  const parts = String(n).split("");
-  let out = "";
-  for (let i = 0; i < parts.length; i++){
-    const fromEnd = parts.length - i;
-    out += parts[i];
-    if (fromEnd > 1 && fromEnd % 3 === 1) out += " ";
-  }
-  return `${out} ${CONFIG.currencySuffix}`;
-}
-
 // -------------------------
-// Discount codes (examples)
+// Discount codes
 // -------------------------
 const DISCOUNTS = {
   "SAVE10": { code: "SAVE10", type: "PERCENT", value: 10 },
@@ -52,17 +38,21 @@ const DISCOUNTS = {
 // -------------------------
 // Cart state
 // -------------------------
-let cartItems = [];
-let appliedDiscount = null; // {code,type,value}
+// Use CartUtils to get initial state
+let cartItems = CartUtils.getCart();
+let appliedDiscount = null; 
 
 // -------------------------
-// Core pricing logic (BUG FIX)
+// Core pricing logic
 // -------------------------
 function calcSubtotal(items){
-  return round2(items.reduce((sum, it) => sum + (it.unitPrice * it.quantity), 0));
+    // Items structure: { id, title, price, image, quantity }
+    // Note: CartUtils stores 'price' (number), not 'unitPrice' (legacy name)
+    // We will support both 'price' and 'unitPrice' for backward compatibility if needed, 
+    // but preferred is 'price'.
+  return round2(items.reduce((sum, it) => sum + ((it.price || it.unitPrice || 0) * it.quantity), 0));
 }
 
-// CRITICAL FIX: discount applies once to subtotal (NOT per-item loop)
 function calcDiscountAmount(subtotal, discount){
   if(!discount) return 0;
 
@@ -81,13 +71,10 @@ function calculateTotals(items, discount){
   const subtotal = calcSubtotal(items);
   const discountAmount = calcDiscountAmount(subtotal, discount);
   const discountedSubtotal = round2(subtotal - discountAmount);
-
-  // Tax on discounted amount (Acceptance Criteria)
+  // Tax on discounted amount
   const taxAmount = round2(discountedSubtotal * CONFIG.taxRate);
-
   // Shipping only if there are items
   const shippingAmount = round2(items.length ? CONFIG.shippingFlat : 0);
-
   const total = round2(discountedSubtotal + taxAmount + shippingAmount);
 
   return { subtotal, discountAmount, discountedSubtotal, taxAmount, shippingAmount, total };
@@ -96,25 +83,23 @@ function calculateTotals(items, discount){
 // -------------------------
 // Cart operations
 // -------------------------
-function addToCart(product, qty = 1){
-  const idx = cartItems.findIndex(x => x.id === product.id);
-  if(idx >= 0){
-    cartItems[idx].quantity += qty;
-  } else {
-    cartItems.push({ ...product, quantity: qty });
+function setQty(id, qty){
+  const idx = cartItems.findIndex(x => x.id === id);
+  if(idx === -1) return;
+  
+  if (qty < 1) {
+    // Optional: could confirm removal here, but usually 0 means fail or remove
+    qty = 1; 
   }
+  
+  cartItems[idx].quantity = qty;
+  CartUtils.saveCart(cartItems); // Persist
   render();
 }
 
 function removeFromCart(id){
   cartItems = cartItems.filter(x => x.id !== id);
-  render();
-}
-
-function setQty(id, qty){
-  const item = cartItems.find(x => x.id === id);
-  if(!item) return;
-  item.quantity = Math.max(1, qty);
+  CartUtils.saveCart(cartItems); // Persist
   render();
 }
 
@@ -123,6 +108,7 @@ function clearCart(){
   appliedDiscount = null;
   document.getElementById("discountInput").value = "";
   hideDiscountError();
+  CartUtils.saveCart(cartItems); // Persist
   render();
 }
 
@@ -131,13 +117,17 @@ function clearCart(){
 // -------------------------
 function showDiscountError(msg){
   const el = document.getElementById("discountError");
-  el.textContent = msg;
-  el.style.display = "block";
+  if(el) {
+      el.textContent = msg;
+      el.style.display = "block";
+  }
 }
 function hideDiscountError(){
   const el = document.getElementById("discountError");
-  el.style.display = "none";
-  el.textContent = "";
+  if(el) {
+    el.style.display = "none";
+    el.textContent = "";
+  }
 }
 
 function applyCode(codeRaw){
@@ -174,8 +164,11 @@ function removeDiscount(){
 // Render
 // -------------------------
 function render(){
-  document.getElementById("cartCount").textContent = String(cartItems.length);
-  document.getElementById("cartTitle").textContent = `Shopping Cart (${cartItems.length} items)`;
+  // Update header count via Utils
+  CartUtils.updateCartCountUserInterface();
+  cartItems = CartUtils.getCart(); // Ensure specific sync if needed, though we mutate local ref
+
+  document.getElementById("cartTitle").textContent = `Shopping Cart (${CartUtils.getCartCount()} items)`;
 
   const card = document.getElementById("itemsCard");
   card.innerHTML = "";
@@ -191,15 +184,22 @@ function render(){
     cartItems.forEach((it) => {
       const row = document.createElement("div");
       row.className = "cart-item";
+      
+      const priceVal = it.price || it.unitPrice || 0;
 
       const thumb = document.createElement("div");
-      thumb.className = "thumb" + (it.thumbStyle === "light" ? " light" : "");
-      thumb.textContent = it.thumbText || "Product";
+      // Fallback logic for demo compatibility or clean styling
+      thumb.className = "thumb";
+      if(it.image) {
+          thumb.innerHTML = `<img src="${it.image.startsWith('src/') ? '../../'+it.image : it.image}" style="width:100%; height:100%; object-fit:cover;">`;
+      } else {
+          thumb.textContent = "Product";
+      }
 
       const meta = document.createElement("div");
       meta.className = "meta";
       meta.innerHTML = `
-        <div class="title">${escapeHtml(it.name)}</div>
+        <div class="title">${escapeHtml(it.title || it.name)}</div>
         <div class="variant">${escapeHtml(it.variant || "")}</div>
         <div class="qty">
           <button class="qtybtn" aria-label="Decrease">−</button>
@@ -211,7 +211,7 @@ function render(){
       const right = document.createElement("div");
       right.className = "right-meta";
       right.innerHTML = `
-        <div class="price">${formatCFA(it.unitPrice)}</div>
+        <div class="price">${CartUtils.formatCurrency(priceVal)}</div>
         <button class="remove" aria-label="Remove">🗑 Remove</button>
       `;
 
@@ -230,10 +230,10 @@ function render(){
 
   const totals = calculateTotals(cartItems, appliedDiscount);
 
-  document.getElementById("subtotal").textContent = formatCFA(totals.subtotal);
-  document.getElementById("shipping").textContent = formatCFA(totals.shippingAmount);
-  document.getElementById("tax").textContent = formatCFA(totals.taxAmount);
-  document.getElementById("total").textContent = formatCFA(totals.total);
+  document.getElementById("subtotal").textContent = CartUtils.formatCurrency(totals.subtotal);
+  document.getElementById("shipping").textContent = CartUtils.formatCurrency(totals.shippingAmount);
+  document.getElementById("tax").textContent = CartUtils.formatCurrency(totals.taxAmount);
+  document.getElementById("total").textContent = CartUtils.formatCurrency(totals.total);
 
   const discountRow = document.getElementById("discountRow");
   const discountApplied = document.getElementById("discountApplied");
@@ -241,11 +241,11 @@ function render(){
   if(appliedDiscount){
     discountRow.style.display = "flex";
     document.getElementById("discountLabel").textContent = `Discount (${appliedDiscount.code})`;
-    document.getElementById("discountAmount").textContent = "-" + formatCFA(totals.discountAmount);
+    document.getElementById("discountAmount").textContent = "-" + CartUtils.formatCurrency(totals.discountAmount);
 
     discountApplied.style.display = "flex";
     document.getElementById("discountAppliedText").textContent =
-      `${appliedDiscount.code} applied • You saved ${formatCFA(totals.discountAmount)}`;
+      `${appliedDiscount.code} applied • You saved ${CartUtils.formatCurrency(totals.discountAmount)}`;
   } else {
     discountRow.style.display = "none";
     discountApplied.style.display = "none";
@@ -254,10 +254,9 @@ function render(){
   const checkoutBtn = document.getElementById("checkoutBtn");
   checkoutBtn.disabled = cartItems.length === 0;
 
-  // This payload is what you should store and use for the order confirmation email
   checkoutBtn.onclick = () => {
     const payload = {
-      items: cartItems.map(i => ({ id: i.id, name: i.name, qty: i.quantity, unitPrice: i.unitPrice })),
+      items: cartItems,
       discount: appliedDiscount,
       totals
     };
@@ -273,6 +272,9 @@ function render(){
 // Wire up events on load
 // -------------------------
 document.addEventListener("DOMContentLoaded", () => {
+  // Sync logic
+  CartUtils.updateCartCountUserInterface();
+  
   document.getElementById("applyBtn").addEventListener("click", () => {
     applyCode(document.getElementById("discountInput").value);
   });
@@ -285,35 +287,34 @@ document.addEventListener("DOMContentLoaded", () => {
 
   document.getElementById("removeDiscountBtn").addEventListener("click", removeDiscount);
 
-  // Demo actions (now in CFA)
+  // Demo actions
+  // Updated to use CartUtils for adding
   document.getElementById("demoAdd3").addEventListener("click", () => {
-    addToCart({
+    // Mock products formatted for CartUtils
+    // CartUtils expects { id, title, price, image }
+    CartUtils.addToCart({
       id: "p1",
-      name: "Studio Wireless Pro",
-      variant: "Matte Black | Over-Ear",
-      unitPrice: 185000,
-      thumbText: "Headphones",
-      thumbStyle: "dark"
+      title: "Studio Wireless Pro",
+      price: 185000,
+      image: "src/images/headphones.jpg"
     }, 1);
 
-    addToCart({
+    CartUtils.addToCart({
       id: "p2",
-      name: "Chronos Minimalist",
-      variant: "Silver | Leather Strap",
-      unitPrice: 115000,
-      thumbText: "Watch",
-      thumbStyle: "light"
+      title: "Chronos Minimalist",
+      price: 115000,
+      image: "src/images/watch.jpg"
     }, 1);
 
-    // Add a third item for testing 3+ items (use any CFA amount)
-    addToCart({
+    CartUtils.addToCart({
       id: "p3",
-      name: "Everyday Tote",
-      variant: "Sand | Canvas",
-      unitPrice: 0,
-      thumbText: "Bag",
-      thumbStyle: "light"
+      title: "Everyday Tote",
+      price: 20000,
+      image: "src/images/bag.jpg" // placeholder
     }, 1);
+    
+    // Refresh local state from Utils
+    render();
   });
 
   document.getElementById("demoClear").addEventListener("click", clearCart);

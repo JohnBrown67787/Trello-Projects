@@ -26,12 +26,18 @@
       </button>
       <button class="iconbtn" aria-label="Favorites">♥</button>
 
-      <div class="user">
+      <div class="user" id="user-profile-section">
         <div>
-          <div class="name">Alex Rivera</div>
-          <div class="tier">Pro Member</div>
+          <div class="name" id="user-name">Guest</div>
+          <div class="tier" id="user-email">Sign In</div>
         </div>
-        <div class="avatar" aria-hidden="true"></div>
+        <div class="avatar" id="user-avatar" aria-hidden="true"></div>
+      </div>
+      
+      <!-- Add explicit auth buttons container for logged out state if needed, though Cart implies some usage. 
+           For consistency, we can add checking. -->
+      <div class="auth-buttons" id="auth-buttons" style="display:none; gap:10px; align-items:center;">
+          <a href="../authentication/login.html" style="text-decoration:none; color:inherit; font-weight:600;">Log In</a>
       </div>
     </div>
   </div>
@@ -117,6 +123,9 @@
     </div>
   </footer>
 
+  <script src="../../backend/auth/supabase-client.js"></script>
+  <script src="../../src/auth-utils.js"></script>
+  <script src="../../src/cart-utils.js"></script>
   <script src="cart.js"></script>
 </body>
 </html>

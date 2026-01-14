@@ -1,0 +1,326 @@
+/* Layout */
+.product-details-container {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 2.5rem;
+    margin-bottom: 4rem;
+}
+
+@media (min-width: 1024px) {
+    .product-details-container {
+        grid-template-columns: 1.2fr 1fr;
+        gap: 4rem;
+    }
+}
+
+/* Gallery */
+.product-gallery {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.main-image-wrapper {
+    aspect-ratio: 1/1;
+    background-color: var(--bg-gray-50);
+    border-radius: 1rem;
+    overflow: hidden;
+    position: relative;
+    border: 1px solid var(--border-gray-200);
+}
+
+.main-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.thumbnail-list {
+    display: flex;
+    gap: 1rem;
+}
+
+.thumbnail {
+    width: 5rem;
+    height: 5rem;
+    border-radius: 0.5rem;
+    border: 1px solid var(--border-gray-200);
+    overflow: hidden;
+    cursor: pointer;
+    opacity: 0.7;
+    transition: all 0.2s;
+}
+
+.thumbnail.active,
+.thumbnail:hover {
+    opacity: 1;
+    border-color: var(--blue-600);
+    box-shadow: 0 0 0 2px rgba(37, 99, 235, 0.2);
+}
+
+.thumbnail img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* Info */
+.product-info {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.new-badge-lg {
+    display: inline-block;
+    padding: 0.25rem 0.75rem;
+    background-color: var(--blue-50);
+    color: var(--blue-600);
+    font-size: 0.75rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    border-radius: 9999px;
+    align-self: flex-start;
+}
+
+.product-title-lg {
+    font-size: 2.5rem;
+    font-weight: 800;
+    line-height: 1.1;
+    color: var(--text-gray-900);
+}
+
+.product-price-lg {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--blue-600);
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.original-price {
+    font-size: 1.125rem;
+    color: var(--text-gray-400);
+    text-decoration: line-through;
+    font-weight: 500;
+}
+
+.short-desc {
+    font-size: 1.125rem;
+    color: var(--text-gray-600);
+    line-height: 1.6;
+}
+
+/* Selectors */
+.selector-group {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+}
+
+.selector-label {
+    font-size: 0.875rem;
+    font-weight: 700;
+    color: var(--text-gray-900);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+.color-options {
+    display: flex;
+    gap: 0.75rem;
+}
+
+.color-option {
+    width: 2.5rem;
+    height: 2.5rem;
+    border-radius: 50%;
+    border: 2px solid var(--bg-white);
+    box-shadow: 0 0 0 1px var(--border-gray-200);
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.color-option.selected {
+    box-shadow: 0 0 0 2px var(--blue-600), 0 0 0 4px var(--bg-white);
+}
+
+/* Actions */
+.actions-row {
+    display: flex;
+    gap: 1rem;
+    margin-top: 1.5rem;
+}
+
+.quantity-selector {
+    display: flex;
+    align-items: center;
+    border: 1px solid var(--border-gray-200);
+    border-radius: 0.75rem;
+    overflow: hidden;
+}
+
+.qty-btn {
+    width: 2.5rem;
+    height: 3rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--bg-gray-50);
+    border: none;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+
+.qty-btn:hover {
+    background: var(--bg-gray-100);
+}
+
+.qty-input {
+    width: 3rem;
+    height: 3rem;
+    border: none;
+    text-align: center;
+    font-weight: 600;
+    font-size: 1rem;
+    appearance: none;
+}
+
+.add-to-cart-lg {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.75rem;
+    background-color: var(--blue-600);
+    color: white;
+    font-weight: 700;
+    font-size: 1rem;
+    border: none;
+    border-radius: 0.75rem;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+
+.add-to-cart-lg:hover {
+    background-color: #1d4ed8;
+}
+
+.wishlist-btn-lg {
+    width: 3.5rem;
+    height: 3rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid var(--border-gray-200);
+    border-radius: 0.75rem;
+    background: white;
+    color: var(--text-gray-400);
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.wishlist-btn-lg:hover {
+    border-color: var(--blue-600);
+    color: var(--blue-600);
+}
+
+/* Trust Badges */
+.trust-badges {
+    display: flex;
+    gap: 2rem;
+    margin-top: 1rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid var(--border-gray-200);
+}
+
+.trust-item {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: var(--text-gray-600);
+    font-size: 0.875rem;
+    font-weight: 500;
+}
+
+.trust-item svg {
+    width: 1.25rem;
+    height: 1.25rem;
+    color: var(--blue-600);
+}
+
+/* Tabs */
+.product-tabs {
+    margin-top: 4rem;
+}
+
+.tab-headers {
+    display: flex;
+    gap: 2rem;
+    border-bottom: 1px solid var(--border-gray-200);
+    margin-bottom: 2rem;
+    overflow-x: auto;
+}
+
+.tab-btn {
+    padding: 1rem 0;
+    background: none;
+    border: none;
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--text-gray-500);
+    cursor: pointer;
+    position: relative;
+    white-space: nowrap;
+}
+
+.tab-btn.active {
+    color: var(--blue-600);
+}
+
+.tab-btn.active::after {
+    content: '';
+    position: absolute;
+    bottom: -1px;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background-color: var(--blue-600);
+}
+
+.tab-content {
+    color: var(--text-gray-600);
+    font-size: 1rem;
+    line-height: 1.7;
+    max-width: 50rem;
+}
+
+.tab-pane {
+    display: none;
+    animation: fadeIn 0.3s ease;
+}
+
+.tab-pane.active {
+    display: block;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(5px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.specs-list {
+    list-style: none;
+}
+
+.specs-list li {
+    display: flex;
+    justify-content: space-between;
+    padding: 0.75rem 0;
+    border-bottom: 1px solid var(--border-gray-100);
+}
+.specs-list li strong {
+    color: var(--text-gray-900);
+}

@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Product Details - LuxeGrid</title>
+    <link rel="stylesheet" href="../../styles.css" />
+    <link rel="stylesheet" href="product-details.css" />
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <div class="app-container">
+      <main class="main-wrapper" style="margin-left: 0;">
+        <!-- Header -->
+        <header class="top-header">
+           <a href="../../index.html" class="logo-area" style="text-decoration: none; display: flex; align-items: center; gap: 0.5rem;">
+             <div class="logo-icon-sm">
+                <svg viewBox="0 0 24 24" class="icon-svg">
+                  <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 14h-2v-4h2v4zm0-6h-2V7h2v3zm4 6h-2v-4h2v4zm0-6h-2V7h2v3z"/>
+                </svg>
+             </div>
+             <span style="font-weight: 700; font-size: 1.25rem; color: var(--text-gray-900);">LuxeGrid</span>
+           </a>
+
+          <div class="header-actions">
+            <button class="icon-btn cart-btn" onclick="window.location.href='../cart/cart.html'">
+              <i data-lucide="shopping-cart"></i>
+              <span class="badge"></span>
+            </button>
+            <button class="icon-btn">
+              <i data-lucide="heart"></i>
+            </button> <!-- Added missing heart icon for consistency -->
+
+            <div class="divider" style="width: 1px; height: 24px; background-color: var(--gray-200); margin: 0 0.5rem;"></div>
+
+            <!-- Auth Buttons -->
+            <div class="auth-buttons" id="auth-buttons" style="display: flex; gap: 0.75rem; align-items: center;">
+              <a href="../authentication/login.html" class="btn btn--ghost" style="text-decoration: none; color: var(--text-gray-900); font-weight: 500;">Log In</a>
+              <a href="../authentication/signin.html" class="btn btn--primary" style="text-decoration: none; background: var(--text-gray-900); color: white; padding: 0.5rem 1rem; border-radius: 9999px; font-weight: 500;">Sign Up</a>
+            </div>
+
+            <!-- User Profile (Hidden by default) -->
+            <button class="user-profile" id="user-profile-btn" style="display: none; display: flex; align-items: center; gap: 0.75rem; background: none; border: none; cursor: pointer; padding: 0;">
+              <div class="user-info" style="text-align: right; display: none; @media (min-width: 768px) { display: block; }">
+                <p class="user-name" id="user-name" style="font-weight: 500; font-size: 0.875rem; color: var(--text-gray-900);">User</p>
+                <p class="user-role" id="user-email" style="font-size: 0.75rem; color: var(--text-gray-500);">user@example.com</p>
+              </div>
+              <img
+                src="https://api.dicebear.com/7.x/avataaars/svg?seed=Guest"
+                alt="User profile"
+                class="avatar"
+                id="user-avatar"
+                style="width: 32px; height: 32px; border-radius: 50%; object-fit: cover; border: 1px solid var(--gray-200);"
+              />
+            </button>
+          </div>
+        </header>
+
+        <div class="content-area">
+            <!-- Breadcrumbs -->
+            <nav class="breadcrumbs">
+                <a href="../../index.html" style="color: inherit; text-decoration: none;">Home</a>
+                <i data-lucide="chevron-right" class="breadcrumb-icon"></i>
+                <a href="../../index.html" style="color: inherit; text-decoration: none;" id="bc-category">Category</a>
+                <i data-lucide="chevron-right" class="breadcrumb-icon"></i>
+                <span class="current" id="bc-title">Product</span>
+            </nav>
+
+            <div id="product-container" class="product-details-container">
+                <!-- Injected via JS -->
+            </div>
+            
+            <div class="product-tabs">
+                <div class="tab-headers">
+                    <button class="tab-btn active" data-tab="desc">Description</button>
+                    <button class="tab-btn" data-tab="specs">Specifications</button>
+                    <button class="tab-btn" data-tab="reviews">Reviews (<span id="review-count">0</span>)</button>
+                </div>
+                <div class="tab-content" id="tab-content">
+                    <!-- Tab Content -->
+                </div>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <footer class="main-footer">
+          <div class="footer-content">
+            <div class="footer-brand">
+              <div class="footer-logo">
+                <div class="logo-icon-sm">
+                  <svg viewBox="0 0 24 24" class="icon-svg">
+                    <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 14h-2v-4h2v4zm0-6h-2V7h2v3zm4 6h-2v-4h2v4zm0-6h-2V7h2v3z"/>
+                  </svg>
+                </div>
+                <span>LuxeGrid</span>
+              </div>
+              <p>© 2026. All rights reserved.</p>
+            </div>
+          </div>
+        </footer>
+      </main>
+    </div>
+    
+    <script src="../../backend/auth/supabase-client.js"></script>
+    <script src="../../src/auth-utils.js"></script>
+    <script src="../../src/data.js"></script>
+    <script src="../../src/cart-utils.js"></script>
+    <script src="product-details.js"></script>
+    <script>
+      lucide.createIcons();
+    </script>
+  </body>
+</html>
